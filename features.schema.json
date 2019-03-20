@@ -1,0 +1,90 @@
+{
+    "$id": "https://github.com/primousers/primostudio/blob/master/features.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Primo-Studio features.json schema",
+    "type": "array",
+    "items": { "$ref": "#/definitions/feature" },
+    "definitions": {
+        "feature": {
+            "type": "object",
+            "required": [
+                "face",
+                "what",
+                "notes",
+                "linkGit",
+                "npmid",
+                "version",
+                "hook"
+            ],
+            "properties": {
+                "face": {
+                    "type": "string",
+                    "description": "URL of image icon to be placed next to add button"
+                },
+                "what": {
+                    "type": "string",
+                    "description": "Title of add-on"
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "Brief description of add-on"
+                },
+                "linkGit": {
+                    "type": "string",
+                    "description": "URL link for github of add-on"
+                },
+                "npmid": {
+                    "type": "string",
+                    "description": "ID of add-on as published on NPM"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Version of add-on to be installed from NPM. Necessary in order to update add-on in Primo Studio"
+                },
+                "hook": {
+                    "type": "string",
+                    "description": "Name of hook where want to place add-on. E.g: prm-search-bar-after"
+                },
+                "systemExclusive": {
+                    "type": "string",
+                    "enum": [ "primo", "ve" ],
+                    "description": "System where the feature only works there, primo or ve. The field is optional because by default any feature should work for both systems, but on special cases (requests, locations, etc...) there is option to limit the system to just one system (primo / ve)"
+                },
+                "config": {
+                    "$ref": "#/definitions/config",
+                    "description": "Object defining a form that will be opened in Primo Studio where users can enter configuration parameters for add-on."
+                }
+            }
+        },
+        "config": {
+            "type": "object",
+            "required": [ "form" ],
+            "properties": {
+                "multiple": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "description": "Max number of forms that are able to be set by the user for the add-on. e.g: Each form defines a link that will be placed under the search bar and we want to allow up to 5 links."
+                },
+                "form": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/formfield" }
+                }
+            }
+        },
+        "formfield": {
+            "type": "object",
+            "required": [ "key" ],
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Form field key"
+                },
+                "templateOptions": {
+                    "type": "object",
+                    "description": "Additional form field options for angular-formly-templates-bootstrap"
+                }
+            }
+        }
+    }
+}

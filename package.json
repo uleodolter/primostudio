@@ -1,0 +1,14 @@
+{
+    "name": "primostudio-features-json",
+    "description": "features.json is a file which lists the various add-ons available for installation through Primo-Studio.",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "test": "ajv validate -s features.schema.json -d features.json"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "ajv-cli": "^3.0.0"
+    }
+}
